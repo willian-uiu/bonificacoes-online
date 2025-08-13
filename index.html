@@ -6,8 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bonificações Online - Pau Brasil Patos e Sumé</title>
 
+
+    <!-- Bootstrap Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 
 <body>
@@ -22,13 +27,13 @@
                 <section class="text-center">
                     <h3>Selecione a revenda:</h3>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="revendaRadio" id="revendaPatos" required>
+                        <input class="form-check-input" type="radio" name="revendaRadio" id="revendaPatos" value="Patos">
                         <label class="form-check-label" for="revendaPatos">
                             Patos
                         </label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="revendaRadio" id="revendaSume">
+                        <input class="form-check-input" type="radio" name="revendaRadio" id="revendaSume" value="Sumé">
                         <label class="form-check-label" for="revendaSume">
                             Sumé
                         </label>
@@ -65,7 +70,7 @@
                             <div class="form-floating">
                                 <input input type="text" class="form-control" id="outroMotivo"
                                     placeholder="Digite o outro motivo" required>
-                                <label for="nbCliente">Digite o outro motivo</label>
+                                <label for="outroMotivo">Digite o outro motivo:</label>
                             </div>
                         </div>
 
@@ -112,7 +117,14 @@
                                                 alt="...">
                                             <h5 class="card-title card-header">Skol 600mL</h5>
                                             <div class="card-body">
-                                                <!-- TODO: ADICIONAR LÓGICA DOS BOTÕES DE QUANTIDADE -->
+                                                <!-- Botões de quantidade -->
+                                                <div class="quantity buttons_added">
+                                                    <input type="button" value="-" class="minus btn btn-success">
+                                                    <input type="text" step="1" min="0" max="" id="1" name="quantity"
+                                                        value="0" title="Qty" class="input-text qty text" size="4"
+                                                        pattern="" inputmode="" />
+                                                    <input type="button" value="+" class="plus btn btn-success">
+                                                </div>
                                             </div>
                                             <div class="card-footer">982</div>
                                         </div>
@@ -123,7 +135,14 @@
                                                 alt="...">
                                             <h5 class="card-title card-header">Brahma 600mL</h5>
                                             <div class="card-body">
-                                                <!-- TODO: ADICIONAR LÓGICA DOS BOTÕES DE QUANTIDADE -->
+                                                <!-- Botões de quantidade -->
+                                                <div class="quantity buttons_added">
+                                                    <input type="button" value="-" class="minus btn btn-success">
+                                                    <input type="text" step="1" min="0" max="" id="2" name="quantity"
+                                                        value="0" title="Qty" class="input-text qty text" size="4"
+                                                        pattern="" inputmode="" />
+                                                    <input type="button" value="+" class="plus btn btn-success">
+                                                </div>
                                             </div>
                                             <div class="card-footer">988</div>
                                         </div>
@@ -134,7 +153,14 @@
                                                 alt="...">
                                             <h5 class="card-title card-header">Budweiser 600mL</h5>
                                             <div class="card-body">
-                                                <!-- TODO: ADICIONAR LÓGICA DOS BOTÕES DE QUANTIDADE -->
+                                                <!-- Botões de quantidade -->
+                                                <div class="quantity buttons_added">
+                                                    <input type="button" value="-" class="minus btn btn-success">
+                                                    <input type="text" step="1" min="0" max="" id="3" name="quantity"
+                                                        value="0" title="Qty" class="input-text qty text" size="4"
+                                                        pattern="" inputmode="" />
+                                                    <input type="button" value="+" class="plus btn btn-success">
+                                                </div>
                                             </div>
                                             <div class="card-footer">2548</div>
                                         </div>
@@ -145,7 +171,14 @@
                                                 class="card-img-top mx-auto w-25" alt="...">
                                             <h5 class="card-title card-header">Original 600mL</h5>
                                             <div class="card-body">
-                                                <!-- TODO: ADICIONAR LÓGICA DOS BOTÕES DE QUANTIDADE -->
+                                                <!-- Botões de quantidade -->
+                                                <div class="quantity buttons_added">
+                                                    <input type="button" value="-" class="minus btn btn-success">
+                                                    <input type="text" step="1" min="0" max="" id="4" name="quantity"
+                                                        value="0" title="Qty" class="input-text qty text" size="4"
+                                                        pattern="" inputmode="" />
+                                                    <input type="button" value="+" class="plus btn btn-success">
+                                                </div>
                                             </div>
                                             <div class="card-footer">2546</div>
                                         </div>
@@ -157,7 +190,14 @@
                                                 alt="...">
                                             <h5 class="card-title card-header">Spaten 600mL</h5>
                                             <div class="card-body">
-                                                <!-- TODO: ADICIONAR LÓGICA DOS BOTÕES DE QUANTIDADE -->
+                                                <!-- Botões de quantidade -->
+                                                <div class="quantity buttons_added">
+                                                    <input type="button" value="-" class="minus btn btn-success">
+                                                    <input type="text" step="1" min="0" max="" id="5" name="quantity"
+                                                        value="0" title="Qty" class="input-text qty text" size="4"
+                                                        pattern="" inputmode="" />
+                                                    <input type="button" value="+" class="plus btn btn-success">
+                                                </div>
                                             </div>
                                             <div class="card-footer">23186</div>
                                         </div>
@@ -169,7 +209,14 @@
                                                 alt="...">
                                             <h5 class="card-title card-header">Stella 600mL</h5>
                                             <div class="card-body">
-                                                <!-- TODO: ADICIONAR LÓGICA DOS BOTÕES DE QUANTIDADE -->
+                                                <!-- Botões de quantidade -->
+                                                <div class="quantity buttons_added">
+                                                    <input type="button" value="-" class="minus btn btn-success">
+                                                    <input type="text" step="1" min="0" max="" id="6" name="quantity"
+                                                        value="0" title="Qty" class="input-text qty text" size="4"
+                                                        pattern="" inputmode="" />
+                                                    <input type="button" value="+" class="plus btn btn-success">
+                                                </div>
                                             </div>
                                             <div class="card-footer">20530</div>
                                         </div>
@@ -257,19 +304,45 @@
 
 
 
-            <div class="col-12">
-                <button class="btn btn-primary " type="submit">Solicitar bonificação</button>
-            </div>
+            <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" onclick="calc()"
+                class="btn btn-primary">
+                Confirmar pedido!
+            </button>
         </form>
 
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Pedido anotado!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="output">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quero corrigir</button>
+                        <button type="button" class="btn btn-primary">Confirmar Bonificação</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
     <footer>
 
     </footer>
+    <!-- Script Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
+
+    <script src="scripts/jquery-3.6.0.min.js"> </script>
+    <script src="scripts/quantity.js"> </script>
+    <script src="scripts/javascript.js"> </script>
+    <script src="scripts/jquery.mask.min.js"> </script>
 </body>
 
 </html>
