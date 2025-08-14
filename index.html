@@ -21,13 +21,14 @@
     </header>
     <main class="container">
 
-        <form class="row g-3">
+        <form class="row g-3" id="submit-to-google-sheet">
             <section class="content-center">
                 <h2 class="text-center">Informações do cliente</h2>
                 <section class="text-center">
                     <h3>Selecione a revenda:</h3>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="revendaRadio" id="revendaPatos" value="Patos">
+                        <input class="form-check-input" type="radio" name="revendaRadio" id="revendaPatos"
+                            value="Patos">
                         <label class="form-check-label" for="revendaPatos">
                             Patos
                         </label>
@@ -112,7 +113,7 @@
 
                                 <div class="row row-cols-1 row-cols-md-3 g-4">
                                     <div class="col">
-                                        <div class="card h-100 text-center">
+                                        <div class="card h-100 text-center" data-product-name="Skol 600mL" data-product-code="982">
                                             <img src="assets/cervejas 600/skol.webp" class="card-img-top mx-auto w-25"
                                                 alt="...">
                                             <h5 class="card-title card-header">Skol 600mL</h5>
@@ -120,7 +121,7 @@
                                                 <!-- Botões de quantidade -->
                                                 <div class="quantity buttons_added">
                                                     <input type="button" value="-" class="minus btn btn-primary">
-                                                    <input type="text" step="1" min="0" max="" id="1" name="quantity"
+                                                    <input type="number" step="1" min="0" max="" id="1" name="quantity"
                                                         value="0" title="Qty" class="input-text qty text" size="4"
                                                         pattern="" inputmode="" />
                                                     <input type="button" value="+" class="plus btn btn-primary">
@@ -130,7 +131,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="card h-100 text-center">
+                                        <div class="card h-100 text-center" data-product-name="Brahma 600mL" data-product-code="988">
                                             <img src="assets/cervejas 600/brahma.webp" class="card-img-top mx-auto w-25"
                                                 alt="...">
                                             <h5 class="card-title card-header">Brahma 600mL</h5>
@@ -138,7 +139,7 @@
                                                 <!-- Botões de quantidade -->
                                                 <div class="quantity buttons_added">
                                                     <input type="button" value="-" class="minus btn btn-primary">
-                                                    <input type="text" step="1" min="0" max="" id="2" name="quantity"
+                                                    <input  type="number"  step="1" min="0" max="" id="2" name="quantity"
                                                         value="0" title="Qty" class="input-text qty text" size="4"
                                                         pattern="" inputmode="" />
                                                     <input type="button" value="+" class="plus btn btn-primary">
@@ -148,7 +149,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="card h-100 text-center">
+                                        <div class="card h-100 text-center" data-product-name="Budweiser 600mL" data-product-code="2548">
                                             <img src="assets/cervejas 600/bud.webp" class="card-img-top mx-auto w-25"
                                                 alt="...">
                                             <h5 class="card-title card-header">Budweiser 600mL</h5>
@@ -156,7 +157,7 @@
                                                 <!-- Botões de quantidade -->
                                                 <div class="quantity buttons_added">
                                                     <input type="button" value="-" class="minus btn btn-primary">
-                                                    <input type="text" step="1" min="0" max="" id="3" name="quantity"
+                                                    <input type="number"  step="1" min="0" max="" id="3" name="quantity"
                                                         value="0" title="Qty" class="input-text qty text" size="4"
                                                         pattern="" inputmode="" />
                                                     <input type="button" value="+" class="plus btn btn-primary">
@@ -166,7 +167,7 @@
                                         </div>
                                     </div>
                                     <div class="col">
-                                        <div class="card h-100 text-center">
+                                        <div class="card h-100 text-center" data-product-name="Original 600mL" data-product-code="2546">
                                             <img src="assets/cervejas 600/original.webp"
                                                 class="card-img-top mx-auto w-25" alt="...">
                                             <h5 class="card-title card-header">Original 600mL</h5>
@@ -174,7 +175,7 @@
                                                 <!-- Botões de quantidade -->
                                                 <div class="quantity buttons_added">
                                                     <input type="button" value="-" class="minus btn btn-primary">
-                                                    <input type="text" step="1" min="0" max="" id="4" name="quantity"
+                                                    <input  type="number"  step="1" min="0" max="" id="4" name="quantity"
                                                         value="0" title="Qty" class="input-text qty text" size="4"
                                                         pattern="" inputmode="" />
                                                     <input type="button" value="+" class="plus btn btn-primary">
@@ -185,7 +186,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <div class="card h-100 text-center">
+                                        <div class="card h-100 text-center" data-product-name="Spaten 600mL" data-product-code="23186">
                                             <img src="assets/cervejas 600/spaten.webp" class="card-img-top mx-auto w-25"
                                                 alt="...">
                                             <h5 class="card-title card-header">Spaten 600mL</h5>
@@ -193,7 +194,7 @@
                                                 <!-- Botões de quantidade -->
                                                 <div class="quantity buttons_added">
                                                     <input type="button" value="-" class="minus btn btn-primary">
-                                                    <input type="text" step="1" min="0" max="" id="5" name="quantity"
+                                                    <input type="number" step="1" min="0" max="" id="5" name="quantity"
                                                         value="0" title="Qty" class="input-text qty text" size="4"
                                                         pattern="" inputmode="" />
                                                     <input type="button" value="+" class="plus btn btn-primary">
@@ -204,7 +205,7 @@
                                     </div>
 
                                     <div class="col">
-                                        <div class="card h-100 text-center">
+                                        <div class="card h-100 text-center" data-product-name="Stella 600mL" data-product-code="20530">
                                             <img src="assets/cervejas 600/stella.webp" class="card-img-top mx-auto w-25"
                                                 alt="...">
                                             <h5 class="card-title card-header">Stella 600mL</h5>
@@ -212,7 +213,7 @@
                                                 <!-- Botões de quantidade -->
                                                 <div class="quantity buttons_added">
                                                     <input type="button" value="-" class="minus btn btn-primary">
-                                                    <input type="text" step="1" min="0" max="" id="6" name="quantity"
+                                                    <input type="number"  step="1" min="0" max="" id="6" name="quantity"
                                                         value="0" title="Qty" class="input-text qty text" size="4"
                                                         pattern="" inputmode="" />
                                                     <input type="button" value="+" class="plus btn btn-primary">
@@ -281,12 +282,12 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseFour" aria-expanded="false"
-                                aria-controls="flush-collapseFour">
+                                data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                aria-controls="flush-collapseFive">
                                 Chopps
                             </button>
                         </h2>
-                        <div id="flush-collapseFour" class="accordion-collapse collapse"
+                        <div id="flush-collapseFive" class="accordion-collapse collapse"
                             data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body">
                                 <!-- TODO: COLOCAR CERVEJAS LATA -->
@@ -308,27 +309,30 @@
                 class="btn btn-primary">
                 Confirmar pedido!
             </button>
-        </form>
 
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Pedido anotado!</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="output">
+            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="staticBackdropLabel">Pedido anotado!</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quero corrigir</button>
-                        <button type="button" class="btn btn-primary">Confirmar Bonificação</button>
+                        <div class="modal-body">
+                            <div id="output">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quero
+                                corrigir</button>
+                            <button type="submit" class="btn btn-primary">Confirmar Bonificação</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
+
+
 
     </main>
     <footer>
