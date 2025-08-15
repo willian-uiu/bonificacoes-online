@@ -1,103 +1,150 @@
-function calc() {
-    // --- Início: Coleta das Informações do Cliente ---
-    const revenda = $('input[name="revendaRadio"]:checked').val() || 'Não selecionada';
-    const nbCliente = $('#nbCliente').val();
-    const motivo = $('#motivoGV').val();
-    const cofre = $('#cofreBoni').val();
+// Função auxiliar para formatar a data e hora no padrão brasileiro
+function formatarDataHora(data) {
+  const dia = String(data.getDate()).padStart(2, '0');
+  const mes = String(data.getMonth() + 1).padStart(2, '0'); // Mês começa do 0
+  const ano = data.getFullYear();
+  const horas = String(data.getHours()).padStart(2, '0');
+  const minutos = String(data.getMinutes()).padStart(2, '0');
+  const segundos = String(data.getSeconds()).padStart(2, '0');
 
-    let cabecalhoResumo = `
-        <h5><b>Informações do Pedido:</b></h5>
-        <ul style="list-style-type: none; padding-left: 0;">
-            <li><b>Revenda:</b> ${revenda}</li>
-            <li><b>NB do Cliente:</b> ${nbCliente}</li>
-            <li><b>Motivo:</b> ${motivo}</li>
-            <li><b>Cofre:</b> ${cofre}</li>
-        </ul>
-        <hr>
-        <h5><b>Produtos:</b></h5>
-    `;
-    // --- Fim: Coleta das Informações do Cliente ---
-
-    let resumoProdutos = '<ul>';
-    let totalItens = 0;
-
-    // Itera sobre cada input de quantidade que seja maior que 0
-    $('.input-text.qty').each(function() {
-        var quantidade = parseInt($(this).val());
-        if (quantidade > 0) {
-            totalItens++;
-            var card = $(this).closest('.card');
-            var nomeProduto = card.data('product-name'); 
-            var codigoProduto = card.data('product-code');
-            resumoProdutos += `<li>${quantidade}x ${nomeProduto} (Cód: ${codigoProduto})</li>`;
-        }
-    });
-
-    if (totalItens === 0) {
-        resumoProdutos += "<li>Nenhum produto selecionado.</li>";
-    }
-
-    resumoProdutos += '</ul>';
-
-    // Junta o cabeçalho com a lista de produtos e insere no Modal
-    $('#output').html(cabecalhoResumo + resumoProdutos); 
+  return `${dia}/${mes}/${ano} ${horas}:${minutos}:${segundos}`;
 }
 
-$('#submit-to-google-sheet').on('submit', function(e) {
-    e.preventDefault();
-  
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxUPKXqwt1Fxq6T4OxbSpm-zQfYMLfmnGOVIThixjWbvw1AWBJHl0FUrQH2LCyko2_y/exec'; // Sua URL do App da Web
-    const submitButton = $(this).find('button[type="submit"]');
-  
-    // 1. Montar o objeto de dados
-    let submissionData = {
+// Função central para obter todos os dados do formulário
+function getPedidoData() {
+  let pedidoData = {
       clienteInfo: {},
       produtos: []
-    };
-  
-    // Preenche as informações do cliente
-    submissionData.clienteInfo.Revenda = $('input[name="revendaRadio"]:checked').val() || '';
-    submissionData.clienteInfo.NBCliente = $('#nbCliente').val();
-    submissionData.clienteInfo.Motivo = $('#motivoGV').val();
-    submissionData.clienteInfo.Cofre = $('#cofreBoni').val();
-    submissionData.clienteInfo.OutroMotivo = $('#outroMotivo').val();
-    
-    // Preenche a lista de produtos
-    $('.input-text.qty').each(function() {
-      let quantidade = parseInt($(this).val());
+  };
+
+  pedidoData.clienteInfo.Timestamp = formatarDataHora(new Date());
+  pedidoData.clienteInfo.Revenda = $('input[name="revendaRadio"]:checked').val() || '';
+  pedidoData.clienteInfo.NBCliente = $('#nbCliente').val();
+  pedidoData.clienteInfo.Motivo = $('#motivoGV').val();
+  pedidoData.clienteInfo.Cofre = $('#cofreBoni').val();
+
+  if (pedidoData.clienteInfo.Motivo === 'Outros') {
+      pedidoData.clienteInfo.OutroMotivo = $('#outroMotivo').val();
+  } else {
+      pedidoData.clienteInfo.OutroMotivo = '';
+  }
+
+  $('.input-text.qty').each(function () {
+      const quantidade = parseInt($(this).val());
       if (quantidade > 0) {
-        let card = $(this).closest('.card');
-        submissionData.produtos.push({
-          NomeSku: card.data('product-name'),
-          CodSKU: card.data('product-code'),
-          Quantidade: quantidade
-        });
+          const card = $(this).closest('.card');
+          pedidoData.produtos.push({
+              NomeSku: card.data('product-name'),
+              CodSKU: card.data('product-code'),
+              Quantidade: quantidade
+          });
       }
-    });
-  
-    // Validação: não envia se nenhum produto foi selecionado
-    if (submissionData.produtos.length === 0) {
+  });
+
+  return pedidoData;
+}
+
+// Função para popular o modal de confirmação
+function calc() {
+  const pedido = getPedidoData();
+  let outroMotivoDisplay = '';
+  if (pedido.clienteInfo.Motivo === 'Outros' && pedido.clienteInfo.OutroMotivo) {
+      outroMotivoDisplay = ` (${pedido.clienteInfo.OutroMotivo})`;
+  }
+  let cabecalhoResumo = `<h5><b>Informações do Pedido:</b></h5><ul style="list-style-type: none; padding-left: 0;"><li><b>Revenda:</b> ${pedido.clienteInfo.Revenda}</li><li><b>NB do Cliente:</b> ${pedido.clienteInfo.NBCliente}</li><li><b>Motivo:</b> ${pedido.clienteInfo.Motivo}${outroMotivoDisplay}</li><li><b>Cofre:</b> ${pedido.clienteInfo.Cofre}</li></ul><hr><h5><b>Produtos:</b></h5>`;
+  let resumoProdutos = '<ul>';
+  if (pedido.produtos.length === 0) {
+      resumoProdutos += "<li>Nenhum produto selecionado.</li>";
+  } else {
+      pedido.produtos.forEach(produto => {
+          resumoProdutos += `<li>${produto.Quantidade}x ${produto.NomeSku} (Cód: ${produto.CodSKU})</li>`;
+      });
+  }
+  resumoProdutos += '</ul>';
+  $('#output').html(cabecalhoResumo + resumoProdutos);
+}
+
+// --- NOVA FUNÇÃO WHATSAPP ---
+// Função para montar e enviar a notificação para o WhatsApp
+function enviarMensagemWhatsApp(pedido) {
+  // IMPORTANTE: Substitua o número abaixo pelo seu número de WhatsApp.
+  // Formato: Código do País (55 para Brasil) + DDD + Número. Sem o '+' ou espaços.
+  const meuNumeroWhatsapp = '5583998614676'; // <-- MUDE AQUI
+
+  const info = pedido.clienteInfo;
+  const produtos = pedido.produtos;
+
+  let mensagemFormatada = `
+*Nova Bonificação Recebida!* 📝
+
+*Cliente:*
+- *Revenda:* ${info.Revenda}
+- *NB:* ${info.NBCliente}
+- *Motivo:* ${info.Motivo} ${info.Motivo === 'Outros' ? `(${info.OutroMotivo})` : ''}
+- *Cofre:* ${info.Cofre}
+
+*Produtos Bonificados:*
+`;
+  produtos.forEach(produto => {
+      mensagemFormatada += `- ${produto.Quantidade}x ${produto.NomeSku} (Cód: ${produto.CodSKU})\n`;
+  });
+  mensagemFormatada += `\n*Registrado em:* ${info.Timestamp}`;
+
+  const mensagemCodificada = encodeURIComponent(mensagemFormatada.trim());
+  const urlWhatsapp = `https://wa.me/${meuNumeroWhatsapp}?text=${mensagemCodificada}`;
+  window.open(urlWhatsapp, '_blank');
+}
+
+// Handler para o envio do formulário
+$('#submit-to-google-sheet').on('submit', function (e) {
+  e.preventDefault();
+  const submissionData = getPedidoData();
+  const info = submissionData.clienteInfo;
+  if (!info.Revenda || !info.NBCliente || !info.Motivo || !info.Cofre || (info.Motivo === 'Outros' && !info.OutroMotivo)) {
+      alert('Por favor, preencha todas as informações do cliente.');
+      return;
+  }
+  if (submissionData.produtos.length === 0) {
       alert('Por favor, selecione a quantidade de pelo menos um produto.');
-      return; // Interrompe a submissão
-    }
-    
-    // Fornece feedback visual para o usuário
-    const originalButtonText = submitButton.text();
-    submitButton.text('Enviando...').prop('disabled', true);
-  
-    // 2. Enviar o objeto como uma string JSON
-    $.ajax({
+      return;
+  }
+
+  // Chama a função do WhatsApp
+  enviarMensagemWhatsApp(submissionData);
+
+  // Continua com o envio para o Google Sheets
+  const scriptURL = 'SUA_URL_DO_APPS_SCRIPT_AQUI';
+  const submitButton = $(this).find('button[type="submit"]');
+  const originalButtonText = submitButton.text();
+  submitButton.text('Enviando...').prop('disabled', true);
+
+  $.ajax({
       url: scriptURL,
       method: 'POST',
-      contentType: 'application/json; charset=utf-8', // Informa ao servidor que estamos enviando JSON
-      data: JSON.stringify(submissionData), // Converte o objeto JS para uma string JSON
-      success: function(response) {
-        alert('Bonificação enviada com sucesso!');
-        window.location.reload();
+      contentType: 'application/json; charset=utf-8',
+      data: JSON.stringify(submissionData),
+      success: function (response) {
+          alert('Bonificação enviada com sucesso para a planilha!');
+          window.location.reload();
       },
-      error: function(err) {
-        alert('Não foi possível enviar a bonificação. Tente novamente.');
-        submitButton.text(originalButtonText).prop('disabled', false);
+      error: function (err) {
+          alert('Não foi possível enviar a bonificação para a planilha. Tente novamente.');
+          submitButton.text(originalButtonText).prop('disabled', false);
       }
-    });
   });
+});
+
+// Lógica para mostrar/esconder o campo "Outro Motivo"
+$(document).ready(function() {
+  const outroMotivoContainer = $('#outroMotivo').closest('.col-md');
+  outroMotivoContainer.hide();
+  $('#motivoGV').on('change', function () {
+      if (this.value === 'Outros') {
+          outroMotivoContainer.show();
+          $('#outroMotivo').prop('required', true);
+      } else {
+          outroMotivoContainer.hide();
+          $('#outroMotivo').prop('required', false).val('');
+      }
+  });
+});
