@@ -94,7 +94,7 @@ function enviarMensagemWhatsApp(pedido) {
   const urlWhatsapp = `https://wa.me/${meuNumeroWhatsapp}?text=${mensagemCodificada}`;
   window.open(urlWhatsapp, '_blank');
 }
-
+/*
 // Handler para o envio do formulário
 $('#submit-to-google-sheet').on('submit', function (e) {
   e.preventDefault();
@@ -133,6 +133,8 @@ $('#submit-to-google-sheet').on('submit', function (e) {
       }
   });
 });
+
+*/
 
 // Lógica para mostrar/esconder o campo "Outro Motivo"
 $(document).ready(function() {
