@@ -94,7 +94,7 @@ function enviarMensagemWhatsApp(pedido) {
   const urlWhatsapp = `https://wa.me/${meuNumeroWhatsapp}?text=${mensagemCodificada}`;
   window.open(urlWhatsapp, '_blank');
 }
-/*
+
 // Handler para o envio do formulário
 $('#submit-to-google-sheet').on('submit', function (e) {
   e.preventDefault();
@@ -108,16 +108,17 @@ $('#submit-to-google-sheet').on('submit', function (e) {
       alert('Por favor, selecione a quantidade de pelo menos um produto.');
       return;
   }
-*/
+
   // Chama a função do WhatsApp
   enviarMensagemWhatsApp(submissionData);
-/*
+
   // Continua com o envio para o Google Sheets
   const scriptURL = 'SUA_URL_DO_APPS_SCRIPT_AQUI';
   const submitButton = $(this).find('button[type="submit"]');
   const originalButtonText = submitButton.text();
   submitButton.text('Enviando...').prop('disabled', true);
 
+  /*
   $.ajax({
       url: scriptURL,
       method: 'POST',
@@ -132,9 +133,10 @@ $('#submit-to-google-sheet').on('submit', function (e) {
           submitButton.text(originalButtonText).prop('disabled', false);
       }
   });
+  */
 });
 
-*/
+
 
 // Lógica para mostrar/esconder o campo "Outro Motivo"
 $(document).ready(function() {
