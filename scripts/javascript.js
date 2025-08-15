@@ -108,10 +108,10 @@ $('#submit-to-google-sheet').on('submit', function (e) {
       alert('Por favor, selecione a quantidade de pelo menos um produto.');
       return;
   }
-
+*/
   // Chama a função do WhatsApp
   enviarMensagemWhatsApp(submissionData);
-
+/*
   // Continua com o envio para o Google Sheets
   const scriptURL = 'SUA_URL_DO_APPS_SCRIPT_AQUI';
   const submitButton = $(this).find('button[type="submit"]');
